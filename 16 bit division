@@ -1,0 +1,17 @@
+MVI C, 00H        
+MVI B, 00H        
+LXI H, 2400H      
+LXI D, 0006H      
+DIV_LOOP:
+    MOV A, H      
+    CMP D         
+    JC DONE       
+    MOV A, L      
+    SUB E         
+    MOV L, A      
+    MOV A, H      
+    SBB D         
+    MOV H, A      
+    INX B         
+    JMP DIV_LOOP  
+HLT   
