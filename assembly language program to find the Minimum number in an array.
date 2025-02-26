@@ -1,0 +1,20 @@
+LXI H, C050H       
+        MOV C, M         
+        MOV B, C           
+        LXI H, C051H   
+        MOV A, M
+        INX H              
+
+FIND_MIN:
+        MOV D, M        
+        CMP D             
+        JC SKIP           
+        MOV A, D         
+
+SKIP:
+        INX H           
+        DCR B              
+        JNZ FIND_MIN    
+
+        STA C060H          
+        HLT
