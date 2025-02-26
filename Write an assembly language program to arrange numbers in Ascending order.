@@ -1,0 +1,39 @@
+MVI D, 00H        
+        LXI H, C050H      
+        MOV C, M         
+        MOV B, C         
+SORT_LOOP:
+        MOV B, C        
+        DCR B            
+        MOV H, C        
+        DCR H
+
+        LXI H, C051H      
+        MOV D, 00H       
+
+INNER_LOOP:
+        MOV A, M         
+        INX H              
+        CMP M              
+        JC NO_SWAP         
+
+        MOV E, M           
+        MOV M, A           
+        DCX H              
+        MOV M, E           
+        INX H              
+        MVI D, 01H        
+
+NO_SWAP:
+        DCR H              
+        JNZ INNER_LOOP    
+
+        MOV A, D          
+        CPI 00H     
+        JZ DONE         
+
+        DCR C            
+        JNZ SORT_LOOP     
+
+DONE:
+        HLT
